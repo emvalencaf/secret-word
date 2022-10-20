@@ -1,7 +1,6 @@
 //styles
 import styles from '../css/GameOver.module.css';
 
-console.log(styles);
 
 const GameOver = ({retry}) => {
   return (
