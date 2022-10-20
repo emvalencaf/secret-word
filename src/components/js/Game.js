@@ -7,7 +7,6 @@ import styles from '../css/Game.module.css';
 
 const Game = ({
   verifyLetter,
-  pickedWord,
   pickedCategory,
   letters,
   guessedLetters,
@@ -16,7 +15,7 @@ const Game = ({
   score
 }) => {
 
-  const [letter, setLetter] = useState();
+  const [letter, setLetter] = useState('');
   const letterInputRef = useRef(null);
 
   const handleSubmit = (e) => {
@@ -29,7 +28,7 @@ const Game = ({
 
   };
   console.log(guessedLetters);
-  
+
   return (
     <div className={styles.game}>
       <p className={styles.points}>
@@ -46,7 +45,7 @@ const Game = ({
         {letters.map((letter, i) => (
           guessedLetters.includes(letter)?
             (
-              <span key={i} className={styles.letter}></span>
+              <span key={i} className={styles.letter}>{letter}</span>
             )
             :(
               <span key={i} className={styles.blankSquare}>

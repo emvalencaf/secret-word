@@ -39,7 +39,7 @@ function App() {
   const [pickedCategory, setPickedCategory] = useState("");
   const [letters, setLetters] = useState([]);
 
-  const [guessedLetters, setGuesedLetters] = useState([]);
+  const [guessedLetters, setGuessedLetters] = useState([]);
   const [wrongLetters, setWrongLetters] = useState([]);
   const [guesses, setGuesses] = useState(guessesQty);
   const [score, setScore] = useState(0);
@@ -64,6 +64,7 @@ function App() {
   const startGame = useCallback(() => {
     //clear all letters
     clearLettersStates();
+    setGuesses(guessesQty);
 
     //pick word and pick category
     const {word, category} = pickWordAndCategory();
@@ -93,7 +94,7 @@ function App() {
 
     if(letters.includes(normalizedLetter)){
       
-      setGuesedLetters((actualGuessedLetters) => [...actualGuessedLetters, normalizedLetter])
+      setGuessedLetters((actualGuessedLetters) => [...actualGuessedLetters, normalizedLetter]);
 
       return;
     }
@@ -106,7 +107,7 @@ function App() {
 
   const clearLettersStates = () => {
 
-    setGuesedLetters([]);
+    setGuessedLetters([]);
     setWrongLetters([]);
 
   }
@@ -131,7 +132,7 @@ function App() {
     const uniqueLetters = [...new Set(letters)];
 
     //win condition
-    if(guessedLetters.length === uniqueLetters. length){
+    if(guessedLetters.length === uniqueLetters.length){
       //add score
 
       setScore((actualScore) => actualScore += 100);
@@ -157,8 +158,8 @@ function App() {
       {gameStage === 'start' && <StartScreen startGame={startGame} />}
       {gameStage === 'game' && <Game
         verifyLetter={verifyLetter}
-        pickedWord={pickedWord}
         pickedCategory={pickedCategory}
+        pickedWord={pickedWord}
         letters={letters}
         wrongLetters={wrongLetters}
         guessedLetters={guessedLetters}
